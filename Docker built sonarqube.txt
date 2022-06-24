@@ -1,0 +1,68 @@
+Jenkins URL
+
+http://54.175.10.26:8080/
+
+
+Soanr qube credentials project token sqp_65c5e6077ed98dc97414b70cb2ccf3139d39b072
+
+Sonarqube helloworld project token sqp_bb0adb75da73e86ac60df95919e4583f416cc671
+
+Sonarqube maven-test project token sqp_abf756180e83be89cafe983190f1cf72c873000d
+
+
+
+
+
+
+Jenkins initial adminpassword
+5200d53a2e834c05be1c6ce4af03e2ce
+
+
+c071f84b1cba488e81b37fef7d90c48d
+
+docker pull mateuscppoi/sonarqube
+
+https://github.com/shazforiot/GOL.git {GIT hub clone}
+
+
+pipeline{
+        stage ('Cloning the project from Git')
+        git 'https://github.com/shazforiot/GOL.git'
+        }
+       stage('SonarQube analysis') {
+            def scannerHome = tool 'sonarqube';
+            withSonarQubeEnv('sonarqube') { 
+                sh "${scannerHome}/bin/sonar-scanner \
+                -D sonar.login=admin \
+                -D sonar.password=admin \
+                -D sonar.projectkey=sonarqubetestproject \
+                -D sonar.exclusions=vendor/**,resources/**,**/*.java \
+                -D sonar.host.url=http://54.226.26.81:9000/"    
+            }
+       }
+    }
+
+
+node{
+    stage (' Cloning the project from Git')
+        git 'https://github.com/shazforiot/GOL.git'
+        }
+    stage('SonarQube analysis') {
+        def scannerHome = tool 'sonarqube';
+        withSonarQubeEnv('sonarqube') { 
+            sh "${scannerHome}/bin/sonar-scanner \
+            -D sonar.login=admin \
+            -D sonar.password=admin \
+            -D sonar.projectkey=sonarqubetestproject \
+            -D sonar.exclusions=vendor/**,resources/**,**/*.java \
+            -D sonar.host.url=http://54.226.26.81:9000/"    
+        }
+    }
+}
+
+
+
+
+
+
+docker pull mc1arke/sonarqube-with-community-branch-plugin

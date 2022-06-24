@@ -1,0 +1,75 @@
+Maven installation - Ubuntu
+
+Mandatory Java should be installed to run Maven
+
+sudo apt install default-jdk -y
+
+java -version
+
+wget https://dlcdn.apache.org/maven/maven-3/3.8.6/binaries/apache-maven-3.8.6-bin.tar.gz
+
+$ tar -xvzf apache-maven-3.8.6-bin.tar.gz
+
+$ sudo cp -r apache-maven-3.8.6 /opt/maven
+
+$ sudo nano /etc/profile.d/maven.sh
+
+export JAVA_HOME=/usr/lib/jvm/default-java
+export M2_HOME=/opt/maven
+export MAVEN_HOME=/opt/maven
+export PATH=${M2_HOME}/bin:${PATH}
+
+Press Ctrl O and press enter and Ctrl X to exit
+
+$ sudo chmod +x /etc/profile.d/maven.sh
+
+$ source /etc/profile.d/maven.sh
+
+$ mvn -version
+
+
+To remove or unistall maven from terminal command 
+
+sudo apt remove maven
+
+
+
+Docker Commands for installing sonarqube as docker image in Ubuntu
+
+sudo apt-get update -y
+
+sudo apt install docker.io
+
+docker version
+
+docker ps -a
+
+docker images
+
+docker start container id
+
+docker run -itd --name sonarcontainer -p "9000:9000" sonarqube
+
+docker rmi sonarqube
+
+docker rm -f containername or id
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
